@@ -55,7 +55,7 @@ function UpdateStudent(props) {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  }, []);
+  }, [idUrl]);
 
   const UpdateStudent = () => {
     firebase.firestore().collection("students").doc(idUrl).set({

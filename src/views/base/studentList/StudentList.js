@@ -26,7 +26,7 @@ function StudentList() {
   const [studentList, setStudentList] = useState([]);
   // const [details, setDetails] = useState([]);
 
-  const user = firebase.auth().currentUser;
+  let user = firebase.auth().currentUser;
   useEffect(() => {
     const getUsers = async () => {
       const db = firebase.firestore();
@@ -40,7 +40,7 @@ function StudentList() {
         });
     };
     getUsers();
-  }, []);
+  }, [user.uid]);
 
   const UserDelete = (id) => {
     firebase.firestore().collection("students").doc(id).delete();

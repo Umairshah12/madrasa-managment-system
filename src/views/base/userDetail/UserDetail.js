@@ -42,7 +42,7 @@ function UserDetail(props) {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  }, []);
+  }, [idUrl]);
 
   return (
     <div className="card">

@@ -11,7 +11,6 @@ import {
 import "./scss/style.scss";
 // import firestore from "./Component/Services/firebase";
 import firebase from "./Component/Services/firebase";
-import routes from "../src/routes";
 
 // import Register from "./Component/Registration/Register";
 
