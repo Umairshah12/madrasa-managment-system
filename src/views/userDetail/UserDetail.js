@@ -12,7 +12,7 @@ import {
 import firebase from "../../Component/Services/firebase";
 
 function UserDetail(props) {
-  let idUrl = props.location.state.id || {};
+  let idUrl = props.match.params.userId;
   const [userName, setUserName] = useState("");
   const [userFname, setUserFname] = useState("");
   const [CNIC, setCNIC] = useState("");
@@ -20,7 +20,6 @@ function UserDetail(props) {
   const [primaryCntct, setPrimaryCntct] = useState("");
   const [secondaryCnct, setSecondaryCntct] = useState("");
   const [address, setAddress] = useState("");
-
   useEffect(() => {
     let docRef = firebase.firestore().collection("students").doc(idUrl);
     docRef
@@ -43,7 +42,6 @@ function UserDetail(props) {
         console.log("Error getting document:", error);
       });
   }, []);
-
   return (
     <div className="card">
       <CCardHeader>
@@ -51,7 +49,6 @@ function UserDetail(props) {
           SINGLE USER DETAIL
         </CBadge>
       </CCardHeader>
-
       <div className="card-body">
         <CRow>
           <CCol>

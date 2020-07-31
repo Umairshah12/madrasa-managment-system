@@ -25,7 +25,7 @@ toast.configure();
 function UpdateStudent(props) {
   // console.log("props id", props.location.state.id);
 
-  let idUrl = props.location.state.id || {};
+  let idUrl = props.match.params.userId;
   const [userName, setUserName] = useState("");
   const [userFname, setUserFname] = useState("");
   const [CNIC, setCNIC] = useState("");
