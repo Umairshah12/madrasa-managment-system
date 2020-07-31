@@ -107,13 +107,7 @@ function StudentList() {
                                 padding: "0.75rem",
                               }}
                             >
-                              <Link
-                                // to={`/base/updateStudent/${item.id}`}
-                                to={{
-                                  pathname: "/updateStudent/" + item.id,
-                                  state: { id: item.id },
-                                }}
-                              >
+                              <Link to={`/updateStudent/${item.id}`}>
                                 <FontAwesomeIcon
                                   style={{ marginTop: "-6px" }}
                                   icon={faEdit}
@@ -127,12 +121,7 @@ function StudentList() {
                                 onClick={() => UserDelete(item.id)}
                               />
 
-                              <Link
-                                to={{
-                                  pathname: "/userDetail/" + item.id,
-                                  state: { id: item.id },
-                                }}
-                              >
+                              <Link to={`/userDetail/${item.id}`}>
                                 <FontAwesomeIcon
                                   style={{ marginTop: "-6px" }}
                                   icon={faUser}
