@@ -22,8 +22,12 @@ const routes = [
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/students", name: "Register Student", component: RegisterStudent },
   { path: "/studentList", name: "Student list", component: StudentList },
-  { path: "/updateStudent", name: "Update Student", component: UpdateStudent },
-  { path: "/userDetail", name: "User Detail", component: UserDetail },
+  {
+    path: "/updateStudent/:userId",
+    name: "Update Student",
+    component: UpdateStudent,
+  },
+  { path: "/userDetail/:userId", name: "User Detail", component: UserDetail },
 
   // { path: "/base", name: "Base", component: Cards, exact: true },
 
