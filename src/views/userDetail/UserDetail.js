@@ -9,7 +9,7 @@ import {
 } from "@coreui/react";
 // import CIcon from "@coreui/icons-react";
 // import { withRouter } from "react-router-dom";
-import firebase from "../../../Component/Services/firebase";
+import firebase from "../../Component/Services/firebase";
 
 function UserDetail(props) {
   let idUrl = props.location.state.id || {};
@@ -42,7 +42,7 @@ function UserDetail(props) {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  }, [idUrl]);
+  }, []);
 
   return (
     <div className="card">

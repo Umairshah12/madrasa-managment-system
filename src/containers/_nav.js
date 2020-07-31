@@ -12,13 +12,13 @@ export default [
       {
         _tag: "CSidebarNavItem",
         name: "Register Student",
-        to: "/base/students",
+        to: "/students",
         icon: "cil-people",
       },
       {
         _tag: "CSidebarNavItem",
         name: "List Student",
-        to: "/base/studentlist",
+        to: "/studentlist",
         icon: "cil-list",
       },
     ],

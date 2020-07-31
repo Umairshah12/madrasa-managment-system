@@ -8,7 +8,7 @@ import {
   CDataTable,
   CRow,
 } from "@coreui/react";
-import firebase from "../../../Component/Services/firebase";
+import firebase from "../../Component/Services/firebase";
 import { Link } from "mdbreact";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +26,7 @@ function StudentList() {
   const [studentList, setStudentList] = useState([]);
   // const [details, setDetails] = useState([]);
 
-  let user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
   useEffect(() => {
     const getUsers = async () => {
       const db = firebase.firestore();
@@ -40,7 +40,7 @@ function StudentList() {
         });
     };
     getUsers();
-  }, [user.uid]);
+  }, []);
 
   const UserDelete = (id) => {
     firebase.firestore().collection("students").doc(id).delete();
@@ -110,7 +110,7 @@ function StudentList() {
                               <Link
                                 // to={`/base/updateStudent/${item.id}`}
                                 to={{
-                                  pathname: "/base/updateStudent/" + item.id,
+                                  pathname: "/updateStudent/" + item.id,
                                   state: { id: item.id },
                                 }}
                               >
@@ -129,7 +129,7 @@ function StudentList() {
 
                               <Link
                                 to={{
-                                  pathname: "/base/userDetail/" + item.id,
+                                  pathname: "/userDetail/" + item.id,
                                   state: { id: item.id },
                                 }}
                               >

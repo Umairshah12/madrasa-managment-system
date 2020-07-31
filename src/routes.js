@@ -1,19 +1,15 @@
 import React from "react";
 
-const Cards = React.lazy(() => import("./views/base/cards/Cards"));
+// const Cards = React.lazy(() => import("./views/base/cards/Cards"));
 const UpdateStudent = React.lazy(() =>
-  import("./views/base/upateStudent/UpdateStudent")
+  import("./views/upateStudent/UpdateStudent")
 );
-const UserDetail = React.lazy(() =>
-  import("./views/base/userDetail/UserDetail")
-);
+const UserDetail = React.lazy(() => import("./views/userDetail/UserDetail"));
 // here student records store
 const RegisterStudent = React.lazy(() =>
-  import("./views/base/students/RegisterStudent")
+  import("./views/students/RegisterStudent")
 );
-const StudentList = React.lazy(() =>
-  import("./views/base/studentList/StudentList")
-);
+const StudentList = React.lazy(() => import("./views/studentList/StudentList"));
 // const TheHeaderDropdown = React.lazy(() =>
 //   import("./containers/TheHeaderDropdown")
 // );
@@ -24,30 +20,34 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  { path: "/students", name: "Register Student", component: RegisterStudent },
+  { path: "/studentList", name: "Student list", component: StudentList },
+  { path: "/updateStudent", name: "Update Student", component: UpdateStudent },
+  { path: "/userDetail", name: "User Detail", component: UserDetail },
 
-  { path: "/base", name: "Base", component: Cards, exact: true },
+  // { path: "/base", name: "Base", component: Cards, exact: true },
 
-  {
-    path: "/base/students",
-    name: "Register Student",
-    component: RegisterStudent,
-  },
-  {
-    path: "/base/StudentList",
-    name: "Student list",
-    component: StudentList,
-  },
-  {
-    path: "/base/updateStudent/",
-    name: "Update Student",
-    component: UpdateStudent,
-  },
+  // {
+  //   path: "/students",
+  //   name: "Register Student",
+  //   component: RegisterStudent,
+  // },
+  // {
+  //   path: "/studentList",
+  //   name: "Student list",
+  //   component: StudentList,
+  // },
+  // {
+  //   path: "/updateStudent/",
+  //   name: "Update Student",
+  //   component: UpdateStudent,
+  // },
 
-  {
-    path: "/base/userDetail/",
-    name: "User Detail",
-    component: UserDetail,
-  },
+  // {
+  //   path: "/userDetail/",
+  //   name: "User Detail",
+  //   component: UserDetail,
+  // },
   // {
   //   path: "/login",
   //   component: TheHeaderDropdown,

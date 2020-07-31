@@ -43,7 +43,7 @@ const WidgetsDropdown = () => {
       </CCol>
 
       <CCol sm="4" lg="4">
-        <Link to="base/students">
+        <Link to="/students">
           <CWidgetDropdown
             color="gradient-danger"
             header="UP COMING "
@@ -60,7 +60,7 @@ const WidgetsDropdown = () => {
       </CCol>
 
       <CCol sm="4" lg="4">
-        <Link to="base/studentlist">
+        <Link to="/studentlist">
           <CWidgetDropdown
             color="gradient-warning"
             header="REGISTERD"

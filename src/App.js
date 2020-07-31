@@ -108,22 +108,22 @@ function App(props) {
             component={TheLayout}
           />
           <PrivateRoute
-            path="/base/studentlist"
+            path="/studentlist"
             authenticated={authenticated}
             component={TheLayout}
           />
           <PrivateRoute
-            path="/base/students"
+            path="/students"
             authenticated={authenticated}
             component={TheLayout}
           />
           <PrivateRoute
-            path="/base/userDetail"
+            path="/userDetail"
             authenticated={authenticated}
             component={TheLayout}
           />
           <PrivateRoute
-            path="/base/updateStudent"
+            path="/updateStudent"
             authenticated={authenticated}
             component={TheLayout}
           />

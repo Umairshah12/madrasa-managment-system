@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CButton,
   CCard,
@@ -16,15 +16,16 @@ import {
 } from "@coreui/react";
 import { withRouter } from "react-router-dom";
 import CIcon from "@coreui/icons-react";
-import firebase from "../../../Component/Services/firebase";
-import { useForm } from "react-hook-form";
-import "../students/registration.css";
+import firebase from "../../Component/Services/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import "../../studentList/node_modules/react-toastify/dist/ReactToastify.css";
 toast.configure();
 
-const RegisterStudent = (props) => {
-  const { register, errors, handleSubmit, clearErrors } = useForm();
+function UpdateStudent(props) {
+  // console.log("props id", props.location.state.id);
+
+  let idUrl = props.location.state.id || {};
   const [userName, setUserName] = useState("");
   const [userFname, setUserFname] = useState("");
   const [CNIC, setCNIC] = useState("");
@@ -32,48 +33,54 @@ const RegisterStudent = (props) => {
   const [primaryCntct, setPrimaryCntct] = useState("");
   const [secondaryCnct, setSecondaryCntct] = useState("");
   const [address, setAddress] = useState("");
-
+  // console.log(props.location.singleuserId);
   const user = firebase.auth().currentUser;
-  const clearField = () => {
-    setUserName("");
-    setUserFname("");
-    setCNIC("");
-    setdob("");
-    setPrimaryCntct("");
-    setSecondaryCntct("");
-    setAddress("");
+  useEffect(() => {
+    let docRef = firebase.firestore().collection("students").doc(idUrl);
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          // console.log("Document data:", doc.data());
+          setUserName(doc.data().username);
+          setUserFname(doc.data().userfname);
+          setCNIC(doc.data().cnic);
+          setdob(doc.data().dob);
+          setPrimaryCntct(doc.data().primarycntct);
+          setSecondaryCntct(doc.data().secondarycnct);
+          setAddress(doc.data().address);
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+  }, []);
+
+  const UpdateStudent = () => {
+    firebase.firestore().collection("students").doc(idUrl).set({
+      uid: user.uid,
+      username: userName,
+      userfname: userFname,
+      cnic: CNIC,
+      dob: dob,
+      primarycntct: primaryCntct,
+      secondarycnct: secondaryCnct,
+      address: address,
+    });
+    toast("User data Updated Successfully!", {
+      type: "success",
+    });
+    console.log("data updated successfully");
+    props.history.replace("/base/studentlist");
   };
 
-  const handleSubmitForm = (data) => {
-    // console.log(data);
-    try {
-      firebase.firestore().collection("students").add({
-        uid: user.uid,
-        username: userName,
-        userfname: userFname,
-        cnic: CNIC,
-        dob: dob,
-        primarycntct: primaryCntct,
-        secondarycnct: secondaryCnct,
-        address: address,
-      });
-      clearField();
-      toast("User Register  Successfully!", {
-        type: "success",
-      });
-      // console.log("USER register successfully");
-    } catch (error) {
-      console.log("form submition error", error.message);
-      clearField();
-    }
-  };
-
-  // console.log("errors", errors);
   return (
     <div className="card">
       <CCardHeader>
         <CBadge style={{ fontSize: "17px" }} className="mr-1" color="primary">
-          User Registration Form
+          UPDATE REGISTER USER
         </CBadge>
       </CCardHeader>
 
@@ -82,101 +89,72 @@ const RegisterStudent = (props) => {
           <CCol xs="12" md="12">
             <CCard>
               <CCardBody>
-                <CForm
-                  onSubmit={handleSubmit(handleSubmitForm)}
-                  className="form-horizontal"
-                >
+                <CForm action="" method="post" className="form-horizontal">
                   <CFormGroup row>
                     <CCol md="4">
                       <CLabel htmlFor="name">STUDENT NAME</CLabel>
                       <CInput
                         type="text"
+                        required="required"
                         onChange={(e) => setUserName(e.target.value)}
                         value={userName}
-                        name="username"
-                        innerRef={register({ required: true })}
                         placeholder="Enter your name..."
-                        autoComplete="email"
                       />
-
-                      {errors.username && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                     <CCol md="4">
                       <CLabel htmlFor="name">FATHER NAME</CLabel>
                       <CInput
                         type="text"
-                        name="fathername"
-                        innerRef={register({ required: true })}
+                        required="required"
                         onChange={(e) => setUserFname(e.target.value)}
                         value={userFname}
                         placeholder="Enter your name..."
                       />
-                      {errors.fathername && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                     <CCol md="4">
                       <CLabel htmlFor="name">CNIC NO</CLabel>
                       <CInput
                         type="text"
-                        name="cnic"
-                        innerRef={register({ required: true })}
                         onChange={(e) => setCNIC(e.target.value)}
                         value={CNIC}
+                        required="required"
                         placeholder="Enter CNIC NO ...."
                       />
-                      {errors.cnic && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                   </CFormGroup>
                   <CFormGroup row>
                     <CCol md="4">
                       <CLabel htmlFor="name">DOB</CLabel>
                       <CInput
+                        required="required"
                         type="date"
                         onChange={(e) => setdob(e.target.value)}
                         value={dob}
-                        name="date"
-                        innerRef={register({ required: true })}
+                        id="date-input"
+                        name="date-input"
                         placeholder="date"
                       />
-                      {errors.date && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                     <CCol md="4">
                       <CLabel htmlFor="name">PRIMARY CONTACT NO</CLabel>
                       <CInput
                         type="number"
+                        required="required"
                         onChange={(e) => setPrimaryCntct(e.target.value)}
                         value={primaryCntct}
-                        name="primarycontact"
                         placeholder="Enter contact No ...."
-                        innerRef={register({ required: true })}
                       />
-                      {errors.primarycontact && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
 
                     <CCol md="4">
-                      <CLabel htmlFor="name" required>
-                        SECONDARY CONTACT NO
-                      </CLabel>
+                      <CLabel htmlFor="name">SECONDARY CONTACT NO</CLabel>
                       <CInput
                         type="number"
                         onChange={(e) => setSecondaryCntct(e.target.value)}
                         value={secondaryCnct}
-                        name="secondarycontact"
+                        required="required"
                         placeholder="Enter contact No ...."
-                        innerRef={register({ required: true })}
                       />
-                      {errors.secondarycontact && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                   </CFormGroup>
                   <CFormGroup row>
@@ -187,45 +165,32 @@ const RegisterStudent = (props) => {
                         onChange={(e) => setAddress(e.target.value)}
                         value={address}
                         id="textarea-input"
-                        name="address"
                         rows="4"
                         placeholder="Enter Address....."
-                        innerRef={register({ required: true })}
                       />
-                      {errors.address && (
-                        <span className="error">This field is required</span>
-                      )}
                     </CCol>
                   </CFormGroup>
-                  <CCardFooter>
-                    <CButton type="submit" size="sm" color="success">
-                      <CIcon name="cil-scrubber" /> Register
-                    </CButton>{" "}
-                    <CButton
-                      type="reset"
-                      onClick={clearField}
-                      size="sm"
-                      color="danger"
-                    >
-                      <CIcon name="cil-ban" /> Cancel
-                    </CButton>{" "}
-                    <CButton
-                      type="reset"
-                      onClick={() => clearErrors()}
-                      size="sm"
-                      color="info"
-                    >
-                      <CIcon name="cil-trash" /> Clear Errors
-                    </CButton>
-                  </CCardFooter>
                 </CForm>
               </CCardBody>
+              <CCardFooter>
+                <CButton
+                  type="submit"
+                  onClick={UpdateStudent}
+                  size="sm"
+                  color="success"
+                >
+                  <CIcon name="cil-scrubber" /> Update Student
+                </CButton>{" "}
+                {/* <CButton type="reset" onClick="" size="sm" color="danger">
+                  <CIcon name="cil-ban" /> Cancel
+                </CButton> */}
+              </CCardFooter>
             </CCard>
           </CCol>
         </CRow>
       </div>
     </div>
   );
-};
+}
 
-export default withRouter(RegisterStudent);
+export default withRouter(UpdateStudent);
