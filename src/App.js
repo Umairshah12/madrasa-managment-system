@@ -127,7 +127,7 @@ function App(props) {
             component={TheLayout}
           />
           <PrivateRoute
-            path="/updateStudent/:id"
+            path="/updateStudent/:userId"
             authenticated={authenticated}
             component={TheLayout}
           />

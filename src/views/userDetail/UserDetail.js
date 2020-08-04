@@ -10,9 +10,10 @@ import {
 // import CIcon from "@coreui/icons-react";
 // import { withRouter } from "react-router-dom";
 import firebase from "../../Component/Services/firebase";
+import { withRouter, useParams } from "react-router-dom";
 
 function UserDetail(props) {
-  let idUrl = props.match.params.userId;
+  const { userId } = useParams();
   const [userName, setUserName] = useState("");
   const [userFname, setUserFname] = useState("");
   const [CNIC, setCNIC] = useState("");
@@ -21,7 +22,7 @@ function UserDetail(props) {
   const [secondaryCnct, setSecondaryCntct] = useState("");
   const [address, setAddress] = useState("");
   useEffect(() => {
-    let docRef = firebase.firestore().collection("students").doc(idUrl);
+    let docRef = firebase.firestore().collection("students").doc(userId);
     docRef
       .get()
       .then(function (doc) {

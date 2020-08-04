@@ -14,7 +14,7 @@ import {
   CBadge,
   CCardHeader,
 } from "@coreui/react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import CIcon from "@coreui/icons-react";
 import firebase from "../../Component/Services/firebase";
 import { toast } from "react-toastify";
@@ -24,8 +24,7 @@ toast.configure();
 
 function UpdateStudent(props) {
   // console.log("props id", props.location.state.id);
-
-  let idUrl = props.match.params.userId;
+  const { userId } = useParams();
   const [userName, setUserName] = useState("");
   const [userFname, setUserFname] = useState("");
   const [CNIC, setCNIC] = useState("");
@@ -36,7 +35,7 @@ function UpdateStudent(props) {
   // console.log(props.location.singleuserId);
   const user = firebase.auth().currentUser;
   useEffect(() => {
-    let docRef = firebase.firestore().collection("students").doc(idUrl);
+    let docRef = firebase.firestore().collection("students").doc(userId);
     docRef
       .get()
       .then(function (doc) {
@@ -59,7 +58,7 @@ function UpdateStudent(props) {
   }, []);
 
   const UpdateStudent = () => {
-    firebase.firestore().collection("students").doc(idUrl).set({
+    firebase.firestore().collection("students").doc(userId).set({
       uid: user.uid,
       username: userName,
       userfname: userFname,
