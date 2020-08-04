@@ -28,20 +28,22 @@ function StudentList() {
   const [studentList, setStudentList] = useState([]);
   // const [details, setDetails] = useState([]);
 
-  const user = firebase.auth().currentUser;
+  let user = firebase.auth().currentUser;
   useEffect(() => {
-    const getUsers = async () => {
+    if (user) {
       const db = firebase.firestore();
-      await db
-        .collection("students")
+      db.collection("students")
         .where("uid", "==", user.uid)
         .onSnapshot((data) => {
           setStudentList(
             data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
           );
         });
-    };
-    getUsers();
+    } else {
+      console.log("no user found");
+    }
+
+    // getUsers();
   }, []);
 
   const UserDelete = (id) => {
