@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -14,11 +14,14 @@ import {
   CInputGroupText,
   CRow,
 } from "@coreui/react";
+import firebase from "../../Component/Services/firebase";
 import CIcon from "@coreui/icons-react";
 import { SignIn } from "../Services/auth";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// import "../Students/node_modules/react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 const Login = (props) => {
@@ -26,10 +29,19 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   let hideTimeout;
+  let history = useHistory();
+  // useEffect(() => {
+  //   let user = firebase.auth().currentUser;
+  //   console.log("user", user);
+  //   //if user redirect dashboard
+  //   if (user && user.uid) {
+  //     history.push("/");
+  //   }
+  // }, [firebase]);
 
-  useEffect(() => {
-    clearTimeout(hideTimeout);
-  }, []);
+  // useEffect(() => {
+  //   clearTimeout(hideTimeout);
+  // }, []);
 
   const LoginSubmit = async (e) => {
     e.preventDefault();

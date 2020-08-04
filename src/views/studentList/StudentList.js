@@ -17,7 +17,9 @@ import "mdbreact/dist/css/mdb.css";
 // import UpdateSutudent from "../upateStudent/UpdateStudent";
 // import { cilVerticalAlignTop } from "@coreui/icons";
 import { toast } from "react-toastify";
+// import "../../Component/Students/node_modules/react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.css";
+
 toast.configure();
 
 // let studentrecord = [];

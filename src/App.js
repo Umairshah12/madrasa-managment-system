@@ -11,6 +11,7 @@ import {
 import "./scss/style.scss";
 // import firestore from "./Component/Services/firebase";
 import firebase from "./Component/Services/firebase";
+import routes from "../src/routes";
 
 // import Register from "./Component/Registration/Register";
 
@@ -118,12 +119,12 @@ function App(props) {
             component={TheLayout}
           />
           <PrivateRoute
-            path="/userDetail"
+            path="/userDetail/:userid"
             authenticated={authenticated}
             component={TheLayout}
           />
           <PrivateRoute
-            path="/updateStudent"
+            path="/updateStudent/:userid"
             authenticated={authenticated}
             component={TheLayout}
           />

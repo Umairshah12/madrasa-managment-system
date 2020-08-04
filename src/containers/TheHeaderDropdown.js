@@ -12,7 +12,9 @@ import { withRouter } from "react-router-dom";
 import firebase from "../Component/Services/firebase";
 import userImg from "../../src/assets/images//user.jpg";
 import { toast } from "react-toastify";
+// import "../Component/Students/node_modules/react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.css";
+
 toast.configure();
 
 const TheHeaderDropdown = (props) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CButton,
   CCard,
@@ -14,7 +14,7 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import { useState } from "react";
 import firebase from "../Services/firebase";
 
@@ -23,6 +23,15 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
+  let user = firebase.auth().currentUser;
+  let history = useHistory();
+  useEffect(() => {
+    //if user redirect dashboard
+    if (user) {
+      history.push("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

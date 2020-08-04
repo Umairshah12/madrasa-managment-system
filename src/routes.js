@@ -26,8 +26,14 @@ const routes = [
     path: "/updateStudent/:userId",
     name: "Update Student",
     component: UpdateStudent,
+    exact: true,
   },
-  { path: "/userDetail/:userId", name: "User Detail", component: UserDetail },
+  {
+    path: "/userDetail/:userId",
+    name: "User Detail",
+    component: UserDetail,
+    exact: true,
+  },
 
   // { path: "/base", name: "Base", component: Cards, exact: true },
 
