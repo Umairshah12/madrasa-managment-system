@@ -21,18 +21,21 @@ const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/students", name: "Register Student", component: RegisterStudent },
-  { path: "/studentList", name: "Student list", component: StudentList },
   {
-    path: "/updateStudent/:userId",
-    name: "Update Student",
-    component: UpdateStudent,
+    path: "/studentList",
+    name: "Student list",
+    component: StudentList,
     exact: true,
   },
   {
-    path: "/userDetail/:userId",
+    path: "/studentlist/update/:userId",
+    name: "Update Student",
+    component: UpdateStudent,
+  },
+  {
+    path: "/studentlist/detail/:userId",
     name: "User Detail",
     component: UserDetail,
-    exact: true,
   },
 
   // { path: "/base", name: "Base", component: Cards, exact: true },

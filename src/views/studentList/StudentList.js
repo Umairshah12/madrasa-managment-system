@@ -9,7 +9,7 @@ import {
   CRow,
 } from "@coreui/react";
 import firebase from "../../Component/Services/firebase";
-import { Link } from "mdbreact";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -111,7 +111,7 @@ function StudentList() {
                                 padding: "0.75rem",
                               }}
                             >
-                              <Link to={`/updateStudent/${item.id}`}>
+                              <Link to={`/studentlist/update/${item.id}`}>
                                 <FontAwesomeIcon
                                   style={{ marginTop: "-6px" }}
                                   icon={faEdit}
@@ -125,7 +125,7 @@ function StudentList() {
                                 onClick={() => UserDelete(item.id)}
                               />
 
-                              <Link to={`/userDetail/${item.id}`}>
+                              <Link to={`/studentlist/detail/${item.id}`}>
                                 <FontAwesomeIcon
                                   style={{ marginTop: "-6px" }}
                                   icon={faUser}

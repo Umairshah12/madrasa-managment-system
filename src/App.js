@@ -115,6 +115,7 @@ function App(props) {
             path="/studentlist"
             authenticated={authenticated}
             component={TheLayout}
+            exact={true}
           />
           <PrivateRoute
             path="/students"
@@ -122,13 +123,13 @@ function App(props) {
             component={TheLayout}
           />
           <PrivateRoute
-            path="/userDetail/:userId"
+            path="/studentlist/detail/:userId"
             authenticated={authenticated}
             component={TheLayout}
             name="User Detail"
           />
           <PrivateRoute
-            path="/updateStudent/:userId"
+            path="/studentlist/update/:userId"
             authenticated={authenticated}
             component={TheLayout}
             name="Update Student"
