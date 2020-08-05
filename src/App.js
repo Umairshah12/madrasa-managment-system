@@ -122,14 +122,16 @@ function App(props) {
             component={TheLayout}
           />
           <PrivateRoute
-            path="/userDetail/:id"
+            path="/userDetail/:userId"
             authenticated={authenticated}
             component={TheLayout}
+            name="User Detail"
           />
           <PrivateRoute
             path="/updateStudent/:userId"
             authenticated={authenticated}
             component={TheLayout}
+            name="Update Student"
           />
           <PublicRoute
             path="/login"

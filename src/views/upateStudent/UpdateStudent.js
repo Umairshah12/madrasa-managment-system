@@ -34,28 +34,31 @@ function UpdateStudent(props) {
   const [address, setAddress] = useState("");
   // console.log(props.location.singleuserId);
   const user = firebase.auth().currentUser;
+  console.log("Student ID", userId);
   useEffect(() => {
-    let docRef = firebase.firestore().collection("students").doc(userId);
-    docRef
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-          setUserName(doc.data().username);
-          setUserFname(doc.data().userfname);
-          setCNIC(doc.data().cnic);
-          setdob(doc.data().dob);
-          setPrimaryCntct(doc.data().primarycntct);
-          setSecondaryCntct(doc.data().secondarycnct);
-          setAddress(doc.data().address);
-        } else {
-          console.log("No such document!");
-        }
-      })
-      .catch(function (error) {
-        console.log("Error getting document:", error);
-      });
-  }, []);
+    if (userId) {
+      let docRef = firebase.firestore().collection("students").doc(userId);
+      docRef
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            setUserName(doc.data().username);
+            setUserFname(doc.data().userfname);
+            setCNIC(doc.data().cnic);
+            setdob(doc.data().dob);
+            setPrimaryCntct(doc.data().primarycntct);
+            setSecondaryCntct(doc.data().secondarycnct);
+            setAddress(doc.data().address);
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  }, [userId]);
 
   const UpdateStudent = () => {
     firebase.firestore().collection("students").doc(userId).set({

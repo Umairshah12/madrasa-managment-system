@@ -21,28 +21,31 @@ function UserDetail(props) {
   const [primaryCntct, setPrimaryCntct] = useState("");
   const [secondaryCnct, setSecondaryCntct] = useState("");
   const [address, setAddress] = useState("");
+  console.log("user ID", userId);
   useEffect(() => {
-    let docRef = firebase.firestore().collection("students").doc(userId);
-    docRef
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          // console.log("Document data:", doc.data());
-          setUserName(doc.data().username);
-          setUserFname(doc.data().userfname);
-          setCNIC(doc.data().cnic);
-          setdob(doc.data().dob);
-          setPrimaryCntct(doc.data().primarycntct);
-          setSecondaryCntct(doc.data().secondarycnct);
-          setAddress(doc.data().address);
-        } else {
-          console.log("No such document!");
-        }
-      })
-      .catch(function (error) {
-        console.log("Error getting document:", error);
-      });
-  }, []);
+    if (userId) {
+      let docRef = firebase.firestore().collection("students").doc(userId);
+      docRef
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            setUserName(doc.data().username);
+            setUserFname(doc.data().userfname);
+            setCNIC(doc.data().cnic);
+            setdob(doc.data().dob);
+            setPrimaryCntct(doc.data().primarycntct);
+            setSecondaryCntct(doc.data().secondarycnct);
+            setAddress(doc.data().address);
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  }, [userId]);
   return (
     <div className="card">
       <CCardHeader>
